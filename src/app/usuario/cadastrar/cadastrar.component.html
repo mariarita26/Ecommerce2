@@ -1,0 +1,45 @@
+<form [formGroup]="formulario" (ngSubmit)="enviar()">
+
+  <mat-form-field appearance="fill" class="input">
+    <mat-label>Nome</mat-label>
+    <input matInput formControlName="nome">
+  </mat-form-field>
+
+  <div class="example-container">
+    <mat-form-field appearance="fill" class="input">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="pat@example.com" required formControlName="email">
+    </mat-form-field>
+  </div>
+
+  <br>
+  <mat-form-field appearance="fill" class="input">
+    <mat-label>CPF</mat-label>
+    <input matInput formControlName="cpf">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="input">
+    <mat-label>Data de nascimento</mat-label>
+    <input matInput type="date" formControlName="dataDeNascimento">
+  </mat-form-field>
+
+  <div class="example-container">
+    <mat-form-field appearance="fill" class="input">
+      <mat-label>Enter your password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" formControlName="senha">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>  
+
+  <mat-form-field appearance="fill" class="input">
+    <mat-label>Imagem</mat-label>
+    <input matInput type="text" formControlName="imagem">
+  </mat-form-field>
+
+  <br> <button mat-raised-button color="primary" [disabled]="!formulario.valid" id="botao-enviar">Enviar</button>
+  <button mat-raised-button [routerLink]="['/listar-produtos']">Cancelar</button>
+</form>
+
+

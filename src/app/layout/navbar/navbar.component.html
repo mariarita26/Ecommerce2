@@ -1,0 +1,26 @@
+<mat-toolbar color="warn">
+  <mat-toolbar-row>
+    <span>E-commerce</span>
+    <span class="example-spacer"></span>
+    <button mat-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['/listar']">Listar Usuários</button>
+      <button mat-menu-item [routerLink]="['/cadastrar-cliente']">Cadastrar Usuário</button>
+      <button mat-menu-item [routerLink]="['/cadastrar-produto']">Cadastrar Produto</button>
+      <button mat-menu-item [routerLink]="['/listar-produtos']">Listar Produtos</button>
+    </mat-menu>
+
+    <form class="example-form">
+      <mat-form-field class="example-full-width busca" appearance="fill">
+        <mat-label>Busca no e-commerce</mat-label>
+        <input type="text" matInput id="icone-busca"> <mat-icon>search</mat-icon>
+      </mat-form-field>
+    </form>
+  
+    <button mat-icon-button [routerLink]="['/cadastrar-cliente']" routerActive id="usuario"> 
+      <mat-icon>face</mat-icon>
+    </button>
+    
+  </mat-toolbar-row>
+

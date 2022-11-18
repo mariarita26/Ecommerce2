@@ -1,0 +1,32 @@
+#card{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 65%;
+    justify-content: space-around;
+    align-items: stretch;
+    align-content: stretch;
+    margin-top: 50px;
+    margin-left: 17.5%;
+    padding: 10px;
+    padding-top: 20px;
+    
+}
+
+
+.img-teste{
+    padding-top: 5px;
+}
+
+mat-card-footer{
+    padding-left: 15px;
+    font-size: large;
+    font-weight: bold;
+}
+
+.mat-card{
+    margin-bottom: 10px;
+}
+// #botao-editar{
+//     padding-top: 2px;
+// }

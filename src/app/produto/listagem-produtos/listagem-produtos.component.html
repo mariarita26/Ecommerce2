@@ -1,0 +1,22 @@
+<div  id="card" fxLayout="row wrap" fxLayout.lt-md="column">
+    <mat-card fxFlex="15" *ngFor="let produto of produtos" style="width: 300px; height: 300px;">
+        <mat-card-header style="padding-bottom: 20px;">
+          <img mat-card-lg-image
+            [src]="produto.foto"
+            class="img-teste"
+          />
+          <div style="padding-left: 10px;">
+            <button mat-icon-button [routerLink]="['/produtos/editar/',produto.id]"><mat-icon id="botao-editar">edit</mat-icon> </button> 
+            <button mat-icon-button (click)="deletar(produto.id)" style="position: absolute;"> <mat-icon>delete</mat-icon> </button>
+          </div>
+        </mat-card-header>
+      
+        <mat-card-content> 
+          <p> {{ produto.informacao }} </p>
+        </mat-card-content>
+      
+        <mat-card-footer>  R${{ produto.valor }} </mat-card-footer>
+  </mat-card>
+</div>
+
+  

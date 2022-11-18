@@ -1,0 +1,46 @@
+<form [formGroup]="formulario" (ngSubmit)="enviar()">
+  <div class="flex">
+    <mat-form-field appearance="fill">
+      <mat-label>Título</mat-label>
+      <input matInput formControlName="titulo" />
+    </mat-form-field>
+  </div>
+  <div class="flex">
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>Valor</mat-label>
+      <input
+        matInput
+        type="number"
+        class="example-right-align"
+        placeholder="0"
+        formControlName="valor"
+      />
+      <span matPrefix>R$&nbsp;</span>
+      <span matSuffix>.00</span>
+    </mat-form-field>
+  </div >
+
+    
+  <div class="flex">
+    <mat-form-field appearance="fill">
+      <mat-label>Foto</mat-label>
+      <input matInput formControlName="foto" />
+    </mat-form-field>
+  </div>
+  <div class="flex">
+    <mat-form-field appearance="fill">
+      <mat-label>Informações</mat-label>
+      <textarea matInput formControlName="informacao"></textarea>
+    </mat-form-field>
+
+
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="!formulario.valid"
+    id="botao-enviar"
+  >
+    Enviar
+  </button></div>
+</form>
+

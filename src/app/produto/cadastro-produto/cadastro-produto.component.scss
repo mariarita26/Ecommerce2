@@ -1,0 +1,26 @@
+form{
+    display: grid!important;
+    padding-top: 120px;
+    margin-left: 470px;
+    // background-color: antiquewhite;
+
+}
+
+#botao-enviar{
+    margin-left: 400px;
+    margin-top: 50px;
+    width:120px;
+
+}
+
+mat-form-field{
+    width:70%;
+    display:grid;
+    grid-auto-flow: column;
+    grid-template-columns:70%;
+
+    
+}
+
+
+
