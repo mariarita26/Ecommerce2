@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduto } from 'src/app/interface/produto';
 import { AlertasService } from 'src/app/services/alertas.service';
+import { ProdutosFirestoreService } from 'src/app/services/produtos-firestore.service';
 import { ProdutosService } from 'src/app/services/produtos.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class ListagemProdutosComponent implements OnInit {
   produtos: IProduto[] = [];
 
   constructor(
-    private produtoService: ProdutosService, 
+    //private produtoService: ProdutosService, 
+    private produtoFirestore: ProdutosFirestoreService,
     private alertaService: AlertasService
   ) { }
 
@@ -22,21 +24,21 @@ export class ListagemProdutosComponent implements OnInit {
   }
 
   listarProdutos() {
-    this.produtoService.listar().subscribe(
+    this.produtoFirestore.listar().subscribe(
       dados => {this.produtos = dados; console.log(dados);
     });
   }
 
-  deletar(id?: number) {
-    if (id) {
-      this.produtoService.excluirProduto(id).subscribe(() => {
-        this.alertaService.alertaSucesso('Produto removido com sucesso');
-        const pfdecerto = this.produtos.findIndex( c => c.id === id);
-        if (pfdecerto > -1) {
-          this.produtos.splice(pfdecerto, 1);
-        } 
-      })
-      this.listarProdutos();
-    }
+  deletar(produto: IProduto) {
+    this.produtoFirestore.apagar(produto.id).subscribe( removido => {
+      this.alertaService.alertaSucesso('Produto removido com sucesso');
+      const indxProduto = this.produtos.findIndex( c => c.id === produto.id);
+      
+      if (indxProduto > -1) {
+        this.produtos.splice(indxProduto, 1);
+      } 
+    })
   }
+
+  
 }
