@@ -81,13 +81,12 @@ export class CadastrarComponent implements OnInit {
     if (this.idCliente) {
       cliente.id = this.idCliente;
       this.clienteFirestore.atualizar(cliente).subscribe(() => {
+        console.log(this.idCliente);
         this.alertaService.alertaSucesso('Editado com sucesso :)');
-        // voltar para pag dos clientes
         this.router.navigate(['/clientes']);
       })
       return;
     }
-
 
     this.clienteFirestore.inserir(cliente).subscribe(() => {
       this.alertaService.alertaSucesso('Cliente cadastrado com sucesso');
@@ -97,7 +96,6 @@ export class CadastrarComponent implements OnInit {
     }); 
 
   }
-
 
   // inserirOuAtualizarUsuario() {
   //   if (this.inserindo) {
