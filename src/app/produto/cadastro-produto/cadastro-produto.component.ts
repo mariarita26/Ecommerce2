@@ -24,15 +24,15 @@ export class CadastroProdutoComponent implements OnInit {
   });
 
   constructor(
-    //private produtoService: ProdutosService,
-    private produtoFirestore: ProdutosFirestoreService,
+    private produtoService: ProdutosService,
+    // private produtoFirestore: ProdutosFirestoreService,
     private alertaService: AlertasService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.produtoFirestore.listar().subscribe((dados) => {
+    this.produtoService.listar().subscribe((dados) => {
       this.produtos = dados;
       console.log(dados);
     });
@@ -64,8 +64,8 @@ export class CadastroProdutoComponent implements OnInit {
     //   })
     //   return;
     // }
-
-    this.produtoFirestore.inserir(produto).subscribe(() => {
+    console.log(produto.informacao);
+    this.produtoService.inserir(produto).subscribe(() => {
         this.alertaService.alertaSucesso('Produto cadastrado com sucesso');
         this.router.navigate(['/listar-produtos']);
       },(error) => {

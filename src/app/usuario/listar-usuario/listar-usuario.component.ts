@@ -15,8 +15,8 @@ export class ListarUsuarioComponent implements OnInit {
   displayedColumns = ['imagem','nome', 'email', 'cpf', 'dataDeNascimento', 'actions'];
 
   constructor(
-    //private clienteService: ClientesService,
-    private clienteFiresrote: ClientesFirestoreService,
+    private clienteService: ClientesService,
+    // private clienteFiresrote: ClientesFirestoreService,
     private alertaService: AlertasService
   ) {}
 
@@ -25,7 +25,7 @@ export class ListarUsuarioComponent implements OnInit {
   }
 
   listar() {
-    this.clienteFiresrote.listar().subscribe((clientes: ICliente[]) => {
+    this.clienteService.listar().subscribe((clientes: ICliente[]) => {
       this.clientes = clientes;
     });
   }
@@ -41,21 +41,31 @@ export class ListarUsuarioComponent implements OnInit {
   //       } 
   //     })
   //     this.listar();
-  //   }      
+  //   }   
+    
+    
   // }
-
-  deletar2(usuarioARemover: ICliente): void {
-    this.clienteFiresrote.apagar(usuarioARemover.id).subscribe(
-      removido => {
-        this.alertaService.alertaSucesso('Cliente removido com sucesso');
-        console.log(removido);
-        const indxUsuario = this.clientes.findIndex(u => u.id === usuarioARemover.id);
-
-        if (indxUsuario > -1) {
-          this.clientes.splice(indxUsuario, 1);
-        }
-
-      }
-    );
+  deletar2(cliente: ICliente) {
+    const id = cliente.id;
+    this.clienteService.excluirCliente(id).subscribe(() => {
+      this.alertaService.alertaSucesso('Cliente removido com sucesso');
+      this.ngOnInit();
+  });
   }
+
+  // DELETAR CLIENTE NO FIRESTORE
+  // deletar2(usuarioARemover: ICliente): void {
+  //   this.clienteFiresrote.apagar(usuarioARemover.id).subscribe(
+  //     removido => {
+  //       this.alertaService.alertaSucesso('Cliente removido com sucesso');
+  //       console.log(removido);
+  //       const indxUsuario = this.clientes.findIndex(u => u.id === usuarioARemover.id);
+
+  //       if (indxUsuario > -1) {
+  //         this.clientes.splice(indxUsuario, 1);
+  //       }
+
+  //     }
+  //   );
+  // }
 }

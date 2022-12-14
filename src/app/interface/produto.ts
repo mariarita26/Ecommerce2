@@ -1,5 +1,5 @@
 export interface IProduto {
-    id?: string,
+    id?: number,
     titulo: string;
     valor: number; 
     foto: string;

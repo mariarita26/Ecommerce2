@@ -14,8 +14,8 @@ export class ListagemProdutosComponent implements OnInit {
   produtos: IProduto[] = [];
 
   constructor(
-    //private produtoService: ProdutosService, 
-    private produtoFirestore: ProdutosFirestoreService,
+    private produtoService: ProdutosService, 
+    // private produtoFirestore: ProdutosFirestoreService,
     private alertaService: AlertasService
   ) { }
 
@@ -24,21 +24,28 @@ export class ListagemProdutosComponent implements OnInit {
   }
 
   listarProdutos() {
-    this.produtoFirestore.listar().subscribe(
+    this.produtoService.listar().subscribe(
       dados => {this.produtos = dados; console.log(dados);
     });
   }
 
-  deletar(produto: IProduto) {
-    this.produtoFirestore.apagar(produto.id).subscribe( removido => {
-      this.alertaService.alertaSucesso('Produto removido com sucesso');
-      const indxProduto = this.produtos.findIndex( c => c.id === produto.id);
+  // DELETAR NO FIRESTORE
+  // deletar(produto: IProduto) {
+  //   this.produtoService.apagar(produto.id).subscribe( removido => {
+  //     this.alertaService.alertaSucesso('Produto removido com sucesso');
+  //     const indxProduto = this.produtos.findIndex( c => c.id === produto.id);
       
-      if (indxProduto > -1) {
-        this.produtos.splice(indxProduto, 1);
-      } 
-    })
-  }
+  //     if (indxProduto > -1) {
+  //       this.produtos.splice(indxProduto, 1);
+  //     } 
+  //   })
+  // }
 
-  
+  deletar(produto: IProduto) {
+    const id = produto.id;
+    this.produtoService.excluirProduto(id).subscribe(() => {
+      this.alertaService.alertaSucesso('Produto removido com sucesso');
+      this.ngOnInit();
+    });
+  }
 }

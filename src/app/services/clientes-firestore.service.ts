@@ -37,11 +37,11 @@ export class ClientesFirestoreService {
     return from(this.colecaoClientes.doc(idParaRemocao).delete());
   }
 
-  atualizar(cliente: ICliente): Observable<void> {
-    const id = cliente.id;
-    delete cliente.id;
+  // atualizar(cliente: ICliente): Observable<void> {
+  //   const id = cliente.id;
+  //   delete cliente.id;
 
-    return from(this.colecaoClientes.doc(id)
-      .update(Object.assign({}, cliente)));
-  }
+  //   return from(this.colecaoClientes.doc(id)
+  //     .update(Object.assign({}, cliente)));
+  // }
 }

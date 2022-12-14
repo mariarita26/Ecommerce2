@@ -9,7 +9,7 @@ import { IProduto } from '../interface/produto';
 })
 export class ProdutosService {
 
-  private readonly URL_produtos = `${environment.API}produtos`;
+  private readonly URL_produtos = `${environment.API}/produto`;
 
   constructor(private http: HttpClient) { }
 
@@ -25,7 +25,7 @@ export class ProdutosService {
     return this.http.get<IProduto>(`${this.URL_produtos}/${id}`);
   }
 
-  excluirProduto(id: number): Observable<object> {
+  excluirProduto(id: number | undefined): Observable<object> {
     return this.http.delete(`${this.URL_produtos}/${id}`);
   }
 

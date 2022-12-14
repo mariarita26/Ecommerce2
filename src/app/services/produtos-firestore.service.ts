@@ -35,11 +35,11 @@ export class ProdutosFirestoreService {
     return from(this.colecaoProdutos.doc(idParaRemocao).delete());
   }
 
-  atualizar(produto: IProduto): Observable<void> {  
-    const id = produto.id;
-    delete produto.id;
+  // atualizar(produto: IProduto): Observable<void> {  
+  //   const id = produto.id;
+  //   delete produto.id;
 
-    return from(this.colecaoProdutos.doc(id)
-      .update(Object.assign({}, produto)));
-  }
+  //   return from(this.colecaoProdutos.doc(id)
+  //     .update(Object.assign({}, produto)));
+  // }
 }

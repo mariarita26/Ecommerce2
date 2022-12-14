@@ -9,7 +9,7 @@ import { ICliente } from '../interface/cliente';
 })
 export class ClientesService {
 
-  private readonly URL_clientes = `${environment.API}clientes`;
+  private readonly URL_clientes = `${environment.API}/pessoa`;
 
   constructor(private http: HttpClient) { }
 
@@ -33,7 +33,7 @@ export class ClientesService {
     return this.http.get<ICliente>(`${this.URL_clientes}/${id}`);
   }
 
-  excluirCliente(id: number): Observable<object>{
+  excluirCliente(id: number | undefined): Observable<object>{
     return this.http.delete(`${this.URL_clientes}/${id}`);
   }
 }

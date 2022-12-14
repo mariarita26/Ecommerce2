@@ -17,21 +17,28 @@ export class CadastrarComponent implements OnInit {
   hide = true;
   clientes: ICliente[] = [];
 
-  idCliente = '';
+  idCliente = 0;
   formulario = new FormGroup({
-    nome: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email]),
+    // nome: new FormControl('', Validators.required),
+    // email: new FormControl('', [Validators.required, Validators.email]),
+    // // cpf: new FormControl('', [Validators.required,Validators.minLength(11), Validators.maxLength(11)]),
+    // cpf: new FormControl(''),
+    // dataDeNascimento: new FormControl('', Validators.required),
+    // senha: new FormControl('', [Validators.required, Validators.min(6)]),
+    // imagem: new FormControl('')
+    nome: new FormControl(''),
+    email: new FormControl(''),
     // cpf: new FormControl('', [Validators.required,Validators.minLength(11), Validators.maxLength(11)]),
     cpf: new FormControl(''),
-    dataDeNascimento: new FormControl('', Validators.required),
-    senha: new FormControl('', [Validators.required, Validators.min(6)]),
+    dataDeNascimento: new FormControl(''),
+    senha: new FormControl(''),
     imagem: new FormControl('')
   })
   email: any;
 
   constructor(
-   // private clienteService: ClientesService, 
-    private clienteFirestore: ClientesFirestoreService,
+    private clienteService: ClientesService, 
+    // private clienteFirestore: ClientesFirestoreService,
     private alertaService: AlertasService,
     private router: Router,
     private route: ActivatedRoute
@@ -41,14 +48,14 @@ export class CadastrarComponent implements OnInit {
     nomeBotao = 'Inserir';
   
   ngOnInit() {
-      this.clienteFirestore.listar().subscribe(
+      this.clienteService.listar().subscribe(
         dados => {this.clientes = dados; console.log(dados);
       });
 
      
       this.route.snapshot.paramMap.get('id');
-      if (this.idCliente) {
-        this.clienteFirestore.pesquisarPorId(this.idCliente).subscribe((cliente: ICliente) => {
+      if (this.idCliente !== 0) {
+        this.clienteService.buscarClientePorId(this.idCliente).subscribe((cliente: ICliente) => {
           this.formulario.setValue({
             nome: cliente.nome,
             email: cliente.email,
@@ -69,26 +76,27 @@ export class CadastrarComponent implements OnInit {
     const cliente: ICliente = this.formulario.value as ICliente;
 
     // JSON SERVER
-    // if (this.idCliente) {
-    //   cliente.id = this.idCliente;
-    //   this.clienteService.atualizar(cliente).subscribe(() => {
-    //     this.alertaService.alertaSucesso('Cliente atualizado com sucesso');
-    //     this.router.navigate(['/listar']);
-    //   })
-    //   return;
-    // }
-    
     if (this.idCliente) {
       cliente.id = this.idCliente;
-      this.clienteFirestore.atualizar(cliente).subscribe(() => {
-        console.log(this.idCliente);
-        this.alertaService.alertaSucesso('Editado com sucesso :)');
-        this.router.navigate(['/clientes']);
+      this.clienteService.atualizar(cliente).subscribe(() => {
+        this.alertaService.alertaSucesso('Cliente atualizado com sucesso');
+        this.router.navigate(['/listar']);
       })
       return;
     }
+    
+    // FIREBASE
+    // if (this.idCliente) {
+    //   cliente.id = this.idCliente;
+    //   this.clienteService.atualizar(cliente).subscribe(() => {
+    //     console.log(this.idCliente);
+    //     this.alertaService.alertaSucesso('Editado com sucesso :)');
+    //     this.router.navigate(['/clientes']);
+    //   })
+    //   return;
+    // }
 
-    this.clienteFirestore.inserir(cliente).subscribe(() => {
+    this.clienteService.inserir(cliente).subscribe(() => {
       this.alertaService.alertaSucesso('Cliente cadastrado com sucesso');
       this.router.navigate(['/listar']);
     }, (error) => {
@@ -99,8 +107,8 @@ export class CadastrarComponent implements OnInit {
 
   // inserirOuAtualizarUsuario() {
   //   if (this.inserindo) {
-  //     this.usuarioService.inserir(this.usuarioAtual).subscribe(
-  //       usuarioInserido => this.mensagemService.info('Usuário cadastrado com sucesso!')
+  //     this.clienteService.inserir(this.usuarioAtual).subscribe(
+  //       usuarioInserido => this.alertaService.alertaSucesso('Usuário cadastrado com sucesso!')
   //     );
   //     this.usuarioAtual = new Usuario('');
   //   } else {
