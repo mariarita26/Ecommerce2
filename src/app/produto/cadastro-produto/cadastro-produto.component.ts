@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProduto } from 'src/app/interface/produto';
 import { AlertasService } from 'src/app/services/alertas.service';
-import { ProdutosFirestoreService } from 'src/app/services/produtos-firestore.service';
 import { ProdutosService } from 'src/app/services/produtos.service';
 
 @Component({
@@ -12,6 +11,7 @@ import { ProdutosService } from 'src/app/services/produtos.service';
   styleUrls: ['./cadastro-produto.component.scss'],
 })
 export class CadastroProdutoComponent implements OnInit {
+
   produtos: IProduto[] = [];
 
   idProduto = 0;
@@ -37,41 +37,42 @@ export class CadastroProdutoComponent implements OnInit {
       console.log(dados);
     });
 
-    // this.idProduto = this.route.snapshot.paramMap.get('id');
-    // if(this.idProduto !== 0) {
-    //   this.produtoFirestore.pesquisarPorId(this.idProduto).subscribe((produto: IProduto) => {
-    //     this.formulario.setValue({
-    //       titulo: produto.titulo,
-    //       valor: produto.valor,
-    //       foto: produto.foto,
-    //       informacao: produto.informacao
-    //     });
-    //   }, (error) => {
-    //     console.log(error); 
-    //   });
-    // }
+    this.idProduto = Number(this.route.snapshot.paramMap.get('id'));
+
+    if(this.idProduto !== 0) {
+      this.produtoService.buscarProdutoPorId(this.idProduto).subscribe((produto: IProduto) => {
+        this.formulario.setValue({
+          titulo: produto.titulo,
+          valor: produto.valor,
+          foto: produto.foto,
+          informacao: produto.informacao
+        });
+      }, (error) => {
+        console.log(error); 
+      });
+    }
   }
 
   enviar() {
 
     const produto: IProduto = this.formulario.value as IProduto;
 
-    // if (this.idProduto) {
-    //   produto.id = this.idProduto;
-    //   this.produtoService.atualizar(produto).subscribe(() => {
-    //     this.alertaService.alertaSucesso('Produto atualizado com sucesso');
-    //     this.router.navigate(['/listar-produtos']);
-    //   })
-    //   return;
-    // }
-    console.log(produto.informacao);
+    if (this.idProduto) {
+      produto.id = this.idProduto;
+      this.produtoService.atualizar(produto).subscribe(() => {
+        this.alertaService.alertaSucesso('Produto atualizado com sucesso');
+        this.router.navigate(['/listar-produtos']);
+      })
+      return;
+    }
+
     this.produtoService.inserir(produto).subscribe(() => {
         this.alertaService.alertaSucesso('Produto cadastrado com sucesso');
         this.router.navigate(['/listar-produtos']);
       },(error) => {
         console.log(error);
       });
-  }
+    }
 
  
 }

@@ -19,19 +19,12 @@ export class CadastrarComponent implements OnInit {
 
   idCliente = 0;
   formulario = new FormGroup({
-    // nome: new FormControl('', Validators.required),
-    // email: new FormControl('', [Validators.required, Validators.email]),
-    // // cpf: new FormControl('', [Validators.required,Validators.minLength(11), Validators.maxLength(11)]),
-    // cpf: new FormControl(''),
-    // dataDeNascimento: new FormControl('', Validators.required),
-    // senha: new FormControl('', [Validators.required, Validators.min(6)]),
-    // imagem: new FormControl('')
-    nome: new FormControl(''),
-    email: new FormControl(''),
+    nome: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
     // cpf: new FormControl('', [Validators.required,Validators.minLength(11), Validators.maxLength(11)]),
     cpf: new FormControl(''),
-    dataDeNascimento: new FormControl(''),
-    senha: new FormControl(''),
+    dataDeNascimento: new FormControl('', Validators.required),
+    senha: new FormControl('', [Validators.required, Validators.min(6)]),
     imagem: new FormControl('')
   })
   email: any;
@@ -53,7 +46,8 @@ export class CadastrarComponent implements OnInit {
       });
 
      
-      this.route.snapshot.paramMap.get('id');
+      this.idCliente = Number(this.route.snapshot.paramMap.get('id'));
+
       if (this.idCliente !== 0) {
         this.clienteService.buscarClientePorId(this.idCliente).subscribe((cliente: ICliente) => {
           this.formulario.setValue({
