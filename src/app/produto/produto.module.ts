@@ -6,13 +6,15 @@ import { ListagemProdutosComponent } from './listagem-produtos/listagem-produtos
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from '../app-routing.module';
+import { InformacaoProdutoComponent } from './informacao-produto/informacao-produto.component';
 
 
 
 @NgModule({
   declarations: [
     CadastroProdutoComponent,
-    ListagemProdutosComponent
+    ListagemProdutosComponent,
+    InformacaoProdutoComponent
   ],
   imports: [
     CommonModule,

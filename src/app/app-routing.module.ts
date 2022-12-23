@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CadastroProdutoComponent } from './produto/cadastro-produto/cadastro-produto.component';
+import { InformacaoProdutoComponent } from './produto/informacao-produto/informacao-produto.component';
 import { ListagemProdutosComponent } from './produto/listagem-produtos/listagem-produtos.component';
 import { CadastrarComponent } from './usuario/cadastrar/cadastrar.component';
 import { ListarUsuarioComponent } from './usuario/listar-usuario/listar-usuario.component';
+import { LoginComponent } from './usuario/login/login.component';
 
 const routes: Routes = [
-  //criar uma rota padrão
   {
     path: '', component: ListagemProdutosComponent
   },
@@ -27,6 +28,12 @@ const routes: Routes = [
   },
   {
     path: 'produtos/editar/:id', component: CadastroProdutoComponent
+  },
+  {
+    path: 'login', component: LoginComponent
+  },
+  {
+    path: 'informacao-produto/:id', component: InformacaoProdutoComponent
   }
 ];
 

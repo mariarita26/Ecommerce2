@@ -18,9 +18,28 @@
       </mat-form-field>
     </form>
   
-    <button mat-icon-button [routerLink]="['/cadastrar-cliente']" routerActive id="usuario"> 
-      <mat-icon>face</mat-icon>
+    <button mat-icon-button [matMenuTriggerFor]="menu2" aria-label="Example icon-button with a menu" id="usuario">
+      <mat-icon>person</mat-icon> faça seu login ou cadastre-se
     </button>
+    <mat-menu #menu2="matMenu">
+      <button mat-menu-item [routerLink]="['/login']">Entrar</button>
+      <button mat-menu-item [routerLink]="['/cadastrar-cliente']" routerActive >Cadastrar</button>
+    </mat-menu>
+
+    <div id="icones">
+      <button mat-icon-button [routerLink]="['/']" routerActive>
+        <mat-icon>store</mat-icon>
+      </button>
+     
+      <button mat-icon-button [routerLink]="['/']" routerActive>
+        <mat-icon>favorite</mat-icon>
+      </button>
+      
+      <button mat-icon-button [routerLink]="['/']" routerActive>
+        <mat-icon>shopping cart</mat-icon>
+      </button> 
+    </div>
+    
     
   </mat-toolbar-row>
 

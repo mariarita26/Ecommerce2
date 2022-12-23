@@ -1,6 +1,7 @@
 <div  id="card" fxLayout="row wrap" fxLayout.lt-md="column">
     <mat-card fxFlex="15" *ngFor="let produto of produtos" style="width: 300px; height: 300px;">
         <mat-card-header style="padding-bottom: 20px;">
+          <!-- <mat-card-header style="padding-bottom: 20px;" [routerLink]="['/informacao-produto', produto.id]"> -->
           <img mat-card-lg-image
             [src]="produto.foto"
             class="img-teste"

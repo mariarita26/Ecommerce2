@@ -6,13 +6,15 @@ import { RouterModule } from '@angular/router';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from '../shared/pipes/pipes.module';
+import { LoginComponent } from './login/login.component';
 
 // p q n funcionou a importação do FormsModule e ReactiveFormsModule aqui???
 
 @NgModule({
   declarations: [
     CadastrarComponent,
-    ListarUsuarioComponent
+    ListarUsuarioComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
